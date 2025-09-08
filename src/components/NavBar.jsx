@@ -1,5 +1,5 @@
 import './NavBar.css'
-
+import CartWidget from './cartWidget'
 export default function NavBar() {
     return (
         <nav>
@@ -9,9 +9,7 @@ export default function NavBar() {
                 <li><a href="#">Mujer</a></li>
                 <li><a href="#">Niños</a></li>
             </ul>
-            <div className="cartWidget">
-                <img src="https://www.nicepng.com/png/detail/116-1169955_app-mall-shopping-cart-comments-shopping-cart-app.png" alt="Cart Widget" />
-            </div>
+<CartWidget />
         </nav>
     )
 }
