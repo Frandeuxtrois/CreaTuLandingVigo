@@ -4,7 +4,7 @@ export default function ButtonAddToCart ( ){
     let [statusInCart, setStatusInCart ] = useState("Sin items en el shop")
 
 function handleClick() {
-    setStatusInCart('Item agregado exitosamente!')
+    setStatusInCart('agregado exitosamente!')
 
 }
 

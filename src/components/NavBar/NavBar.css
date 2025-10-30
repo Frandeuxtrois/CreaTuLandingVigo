@@ -38,13 +38,14 @@ nav ul li a:hover {
 }
 
 .cartWidget {
-  display: flex;
-  align-items: center;
-
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    text-decoration: none;
+    color: black; 
 }
 
 .cartWidget img {
-  width: 30px;
-  height: 30px;
-  margin-right: 10px;
+    height: 40px;
+    width: auto;
 }

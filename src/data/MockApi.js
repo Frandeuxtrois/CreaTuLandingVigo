@@ -17,13 +17,13 @@ export function getProductById( idRequested ){
  
    const promiseProduct = new Promise( (resolve, reject) => {
       setTimeout( () => {
-        console.log("Devolviendo item...", reqItem)
+        console.log("Devolviendo...", reqItem)
 
         if(reqItem){ 
           resolve(reqItem)
         }
         else{
-          reject("Item no encontrado")
+          reject("No encontrado")
         }
       }, 700 )
   })
@@ -37,12 +37,12 @@ export function getProductsByCateg( categRequested ){
     setTimeout( () => {
       if( productsFilter.length >= 1 )
       {
-        console.log("Productos devueltos...", productsFilter)
+        console.log("Productos devueltos", productsFilter)
         resolve(productsFilter)
       }
       else{
-        console.log("No se encontraron items")
-        reject("No encontramos items para esa categoría")
+        console.log("No hay items")
+        reject("No hay items para esa categoría")
       }
     }, 700)
   })

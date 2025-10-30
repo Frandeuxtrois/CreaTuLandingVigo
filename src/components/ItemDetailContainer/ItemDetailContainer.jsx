@@ -1,37 +1,44 @@
-import StateComponent from '../ColorPick/StateComponent'
-import { useParams } from 'react-router'
-import { getProductById } from '../../data/mockApi';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
+import { useParams } from 'react-router';
+import { getProductById } from '../../data/firebase.js';
+import { CartContext } from '../../context/CartContext.jsx';
+import ItemDetail from './ItemDetail.jsx';
 
 function ItemDetailContainer() {
-    const { idParam } = useParams();
-    const [product, setProduct] = useState ( { loading: true});
-    
-useEffect ( () => {
-    getProductById(idParam)
-    .then( response => setProduct (response))
-    .catch ( error => alert(error))
-}, [idParam])
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [isAdded, setIsAdded] = useState(false);
 
-        if ( product.loading ){
-            return <p>Cargando..</p>
-        }
+  const { productId } = useParams();
+  const { addItem } = useContext(CartContext);
 
-        return (<div className='itemcard'>
-            <h2 className='itemcardtitle'>{product.title}</h2>
-            <img
-            className='itemcardimg'
-            height="800"
-            src={product.imgURL}
-            />
-            <h3 className='itemcardprice'>Precio: $ {product.price}</h3>
-            <StateComponent />
-            <div style={{textAlign: "center"}}>
-                <p>{product.description}</p>
-            </div>
-            <div>
-                <button>Agregar</button>
-                </div>
-            </div>)
-        }
-export default ItemDetailContainer
+  useEffect(() => {
+    setLoading(true);
+    getProductById(productId)
+      .then(response => {
+        setProduct(response);
+      })
+      .catch(error => console.error(error))
+      .finally(() => setLoading(false));
+  }, [productId]);
+
+  const handleAddToCart = (quantity) => {
+    addItem(product, quantity);
+    setIsAdded(true);
+  };
+
+  if (loading) {
+    return <p>Cargando producto...</p>;
+  }
+
+  
+  return (
+    <ItemDetail 
+      product={product} 
+      isAdded={isAdded}
+      onAdd={handleAddToCart} 
+    />
+  );
+}
+
+export default ItemDetailContainer;

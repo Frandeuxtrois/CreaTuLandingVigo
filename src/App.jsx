@@ -3,10 +3,8 @@ import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailCont
 import ItemListContainer from './components/ItemListContainer/ItemListContainer'
 import NavBar from './components/NavBar/NavBar';
 import { BrowserRouter, Routes, Route } from 'react-router';
+import CartContainer from './components/CartContainer/CartContainer';
 
-// 1. BrowserRouter como Comp Padre
-// 2. Definir el area donde vamos a navegar con <Routes>
-// 3. Crear rutas con <Route>: definiendo el path (url) y el contenido
 export default function App() {
   return (
     <BrowserRouter>  
@@ -14,8 +12,9 @@ export default function App() {
 
         <Routes>
           <Route path="/" element={<ItemListContainer greeting="Bienvenidos!"/>}/>
-          <Route path="/category/:categParam" element={ <ItemListContainer />} />
-          <Route path="/detalle/:idParam" element={ <ItemDetailContainer/>} /> 
+          <Route path="/category/:categoryId" element={ <ItemListContainer />} />
+          <Route path="/item/:productId" element={ <ItemDetailContainer/>} /> 
+          <Route path="/cart" element={ <CartContainer />} />
           <Route path="*"  element={ <h1>404: Página no encontrada</h1>} /> 
         </Routes>
         
